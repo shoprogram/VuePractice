@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- ルートテンプレート(今回はid=app)の中がVue.jsの適応範囲となる -->
+      <p>
+      {{ message }}
+      <!-- Vue.jsでは基本的にマスタッシュ構文{{}}でテキストを展開していく -->
+      </p>
+      <p>
+        {{ count }}
+      </p>
+      <p>
+        {{user.prefecture}}
+      </p>
+      <p>
+        {{ colors[1] }}
+      </p>
+      <!-- <input type="text" value="{{message}}">
+      属性にはマスタッシュ構文を適応出来ない！ -->
+      <!-- そのため、v-bind:を使用して展開させる↓ -->
+      <input type="text" v-bind:value="message">
+      <p v-if="toggle">
+      <!-- v-ifを設定し、Vueのdata内で各個true,falseを設定することで、要素の表示・非表示を切り替えられる（DOMレベルで削除される） -->
+      Toggle
+      </p>
+      <p v-show="show">
+      <!-- v-ifと機能は殆ど同じだが、v-showでは要素を非表示にする際にCSS(style)のdisplay:noneを使い非表示にしている -->
+      <!-- そのため、頻繁に表示非表示にする場合はv-ifよりも描画コストを抑えられる観点からは優位である -->
+      Show
+      </p>
+      <ul>
+        <li v-for="color in colors">{{ color }}</li>
+       <!--  v-forを使うことで、配列要素を回して展開してくれる（イメージ的にはforEach的な感じ？） -->
+       <hr>
+       <li v-for="(value, key) in user">
+       <!-- 更に、v-forではvalueとkeyをどちらも表示できる。（第一引数はvalue,第二引数はkeyと決まっている。引数名は何でも良い） -->
+         {{ value }} : {{ key }}
+       </li>
+      </ul>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
